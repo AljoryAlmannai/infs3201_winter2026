@@ -1,0 +1,8 @@
+[assignments.json](https://github.com/user-attachments/files/25268789/assignments.json)
+[businessLogicLayer.js](https://github.com/user-attachments/files/25268790/businessLogicLayer.js)[shifts.json](https://github.com/user-attachments/files/25268798/shifts.json)
+[Presentation.js](https://github.com/user-attachments/files/25268797/Presentation.js)
+[persistence.js](https://github.com/user-attachments/files/25268796/persistence.js)
+[package.json](https://github.com/user-attachments/files/25268795/package.json)
+[package-lock.json](https://github.com/user-attachments/files/25268794/package-lock.json)
+[employees.json](https://github.com/user-attachments/files/25268792/employees.json)
+[config.json](https://github.com/user-attachments/files/25268791/config.json)
