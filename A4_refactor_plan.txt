@@ -1,0 +1,63 @@
+
+1- employees
+   - remove employees array as it should be empty while keeping other INFO.
+
+2- shifts
+   - Add a function that goes through all of the assignments and adds 
+   the employee’s object id (not the E001 number) to the employees array 
+   in the shift collection while keeping all other INFO.
+   
+
+3- assignments
+   - Remove it completely. 
+
+
+Functions to modify:
+  - findEmployeeById(employeeId)
+      New: queries { _id: new ObjectId(empId) }
+
+  - loadShiftsForEmployee(employeeId)
+      New: queries shifts where employees array contains the employee ObjectId
+           e.g. find({ employees: empObjectId })
+
+  - updateEmployee(employeeId, name, phone)
+      New: filter { _id: new ObjectId(employeeId) }
+
+  - saveEmployee(employee)
+      New: inserts document without employeeId (MongoDB auto-generates _id)
+
+New functions in persistence.js:
+  - loadConfigData() reads from file.
+
+Business logic changes:
+
+  1- addEmployee(name, phone)
+      Remove the logic that generates "E" number IDs.
+      MongoDB will auto-generate _id.
+
+  2- getEmployee(empid) / viewEmployeeSchedule(empid)
+      empid parameter is now a hex string representing an ObjectId.
+      Must wrap in new ObjectId() before passing to persistence layer.
+
+  - All routes in app.js that use :id must treat id as an ObjectId hex string.
+
+How embedded arrays will affect update operations:
+
+When assigning an employee to a shift:
+  Use $push on the shift document:
+       db.shifts.updateOne({ _id: shiftObjectId }, { $push: { employees: empObjectId } })
+
+When removing an employee from a shift:
+ Use $pull on the shift document:
+       db.shifts.updateOne({ _id: shiftObjectId }, { $pull: { employees: empObjectId } })
+
+Querying shifts for an employee is now a single collection scan:
+  db.shifts.find({ employees: empObjectId })
+
+
+Risks or complications:
+
+1- Broken routes until Step 4 is complete
+   Between Step 3  and Step 4 , the application will not operate. 
+
+2- Session / cookie management which is new to work on.
