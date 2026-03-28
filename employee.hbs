@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{employee.name}} - Details</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1, h2 { color: #333; }
+        a { text-decoration: none; color: #0066cc; }
+        a:hover { text-decoration: underline; }
+        table { border-collapse: collapse; width: 100%; margin-top: 10px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .morning { background-color: yellow; }
+        .back-link { display: inline-block; margin-top: 20px; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; }
+        .logout { font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>{{employee.name}}</h1>
+        <span class="logout">Logged in as <strong>{{username}}</strong> | <a href="/logout">Logout</a></span>
+    </div>
+
+    <p><strong>Phone:</strong> {{employee.phone}}</p>
+    <p><a href="/employee/{{employeeId}}/edit">Edit Details</a></p>
+
+    <h2>Shifts</h2>
+    {{#if shifts.length}}
+    <table>
+        <thead>
+            <tr>
+                <th>Date</th>
+                <th>Start Time</th>
+                <th>End Time</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each shifts}}
+            <tr>
+                <td>{{this.date}}</td>
+                <td class="{{#if this.morning}}morning{{/if}}">{{this.startTime}}</td>
+                <td>{{this.endTime}}</td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>No shifts assigned.</p>
+    {{/if}}
+
+    <a class="back-link" href="/">&#8592; Back to Employees</a>
+</body>
+</html>
