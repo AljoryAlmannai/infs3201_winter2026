@@ -1,6 +1,6 @@
 const { MongoClient, ObjectId } = require('mongodb')
  
-const CONNECTION_STRING = 'mongodb+srv://Aljory:Almannai09@cluster0.zzjcbdu.mongodb.net/'
+const CONNECTION_STRING = 'mongodb+srv://Aljory:*****@cluster0.zzjcbdu.mongodb.net/'
 const DB_NAME = 'infs3201_winter2026'
  
 /**
