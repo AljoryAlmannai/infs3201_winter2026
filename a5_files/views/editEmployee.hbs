@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit - {{employee.name}}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 600px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #333; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input[type="text"] { width: 100%; padding: 8px; margin-top: 4px; box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px; }
+        button { margin-top: 16px; padding: 10px 20px; background-color: #0066cc; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        button:hover { background-color: #004fa3; }
+        a { text-decoration: none; color: #0066cc; display: inline-block; margin-top: 16px; }
+        a:hover { text-decoration: underline; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; }
+        .logout { font-size: 0.9em; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Edit Employee</h1>
+        <span class="logout">Logged in as <strong>{{username}}</strong> | <a href="/logout">Logout</a></span>
+    </div>
+
+    <form method="POST" action="/employee/{{employeeId}}/edit">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" value="{{employee.name}}">
+
+        <label for="phone">Phone (XXXX-XXXX):</label>
+        <input type="text" id="phone" name="phone" value="{{employee.phone}}">
+
+        <button type="submit">Save Changes</button>
+    </form>
+    <a href="/employee/{{employeeId}}">&#8592; Cancel</a>
+</body>
+</html>
+

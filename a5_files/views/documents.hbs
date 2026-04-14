@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Documents - {{employee.name}}</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1, h2 { color: #333; }
+        a { text-decoration: none; color: #0066cc; }
+        a:hover { text-decoration: underline; }
+        .top-bar { display: flex; justify-content: space-between; align-items: center; }
+        .logout { font-size: 0.9em; }
+        .message { margin-top: 12px; padding: 8px; border-radius: 4px; }
+        .message.error { color: #cc0000; background: #fff0f0; }
+        .message.success { color: #007700; background: #f0fff0; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input[type="file"] { margin-top: 6px; }
+        button {
+            margin-top: 12px; padding: 8px 18px;
+            background-color: #0066cc; color: white;
+            border: none; border-radius: 4px; cursor: pointer;
+        }
+        button:hover { background-color: #004fa3; }
+        button:disabled { background-color: #aaa; cursor: not-allowed; }
+        table { border-collapse: collapse; width: 100%; margin-top: 12px; }
+        th, td { border: 1px solid #ccc; padding: 8px 12px; text-align: left; }
+        th { background-color: #f2f2f2; }
+        .back-link { display: inline-block; margin-top: 20px; }
+        .hint { font-size: 0.85em; color: #666; margin-top: 4px; }
+    </style>
+</head>
+<body>
+    <div class="top-bar">
+        <h1>Documents – {{employee.name}}</h1>
+        <span class="logout">Logged in as <strong>{{username}}</strong> | <a href="/logout">Logout</a></span>
+    </div>
+
+    {{#if message}}
+    <p class="message {{#if atLimit}}error{{else}}success{{/if}}">{{message}}</p>
+    {{/if}}
+
+    <h2>Upload Document</h2>
+    {{#if atLimit}}
+    <p style="color:#cc0000;">This employee has reached the maximum of 5 documents. No more uploads are permitted.</p>
+    {{else}}
+    <form method="POST" action="/employee/{{employeeId}}/documents" enctype="multipart/form-data">
+        <label for="document">Select PDF File:</label>
+        <input type="file" id="document" name="document" accept=".pdf" required>
+        <p class="hint">PDF files only · Maximum size: 2MB · Maximum documents per employee: 5</p>
+        <button type="submit">Upload</button>
+    </form>
+    {{/if}}
+
+    <h2>Uploaded Documents ({{documents.length}} / 5)</h2>
+    {{#if documents.length}}
+    <table>
+        <thead>
+            <tr>
+                <th>File Name</th>
+                <th>Uploaded At</th>
+                <th>View</th>
+            </tr>
+        </thead>
+        <tbody>
+            {{#each documents}}
+            <tr>
+                <td>{{this.originalName}}</td>
+                <td>{{this.uploadedAt}}</td>
+                <td><a href="/documents/{{this.filename}}" target="_blank">Open</a></td>
+            </tr>
+            {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+    <p>No documents uploaded yet.</p>
+    {{/if}}
+
+    <a class="back-link" href="/employee/{{employeeId}}">&#8592; Back to Employee</a>
+</body>
+</html>

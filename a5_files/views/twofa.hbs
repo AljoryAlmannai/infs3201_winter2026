@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two-Factor Authentication</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 400px; margin: 80px auto; padding: 0 20px; }
+        h1 { color: #333; }
+        p.info { color: #555; font-size: 0.95em; }
+        label { display: block; margin-top: 12px; font-weight: bold; }
+        input[type="text"] {
+            width: 100%; padding: 8px; margin-top: 4px;
+            box-sizing: border-box; border: 1px solid #ccc; border-radius: 4px;
+            font-size: 1.2em; letter-spacing: 4px; text-align: center;
+        }
+        button {
+            margin-top: 16px; padding: 10px 20px;
+            background-color: #0066cc; color: white;
+            border: none; border-radius: 4px; cursor: pointer; width: 100%;
+        }
+        button:hover { background-color: #004fa3; }
+        .message { color: #cc0000; margin-top: 12px; padding: 8px; background: #fff0f0; border-radius: 4px; }
+        a { display: inline-block; margin-top: 16px; color: #0066cc; text-decoration: none; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Verification Required</h1>
+    <p class="info">A 6-digit verification code has been sent to your email address. Please enter it below. The code expires in 3 minutes.</p>
+
+    {{#if message}}
+    <p class="message">{{message}}</p>
+    {{/if}}
+
+    <form method="POST" action="/2fa">
+        <label for="code">Verification Code:</label>
+        <input type="text" id="code" name="code" maxlength="6" required autocomplete="one-time-code" placeholder="000000">
+        <button type="submit">Verify</button>
+    </form>
+
+    <a href="/login">&#8592; Back to Login</a>
+</body>
+</html>

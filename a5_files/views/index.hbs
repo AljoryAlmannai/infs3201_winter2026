@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Scheduling System</title>
+    <style>
+        body { font-family: Arial, sans-serif; max-width: 800px; margin: 40px auto; padding: 0 20px; }
+        h1 { color: #333; }
+        ul { list-style: none; padding: 0; }
+        li { padding: 8px 0; border-bottom: 1px solid #eee; }
+        a { text-decoration: none; color: #0066cc; }
+        a:hover { text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <h1>Employees</h1>
+    {{#if employees.length}}
+    <ul>
+        {{#each employees}}
+        <li><a href="/employee/{{this.employeeId}}">{{this.name}}</a></li>
+        {{/each}}
+    </ul>
+    {{else}}
+    <p>No employees found.</p>
+    {{/if}}
+</body>
+</html>

@@ -1,0 +1,19 @@
+{
+  "name": "assignment5",
+  "version": "1.0.0",
+  "description": "Employee Scheduling System - Assignment 5",
+  "main": "app.js",
+  "scripts": {
+    "start": "node app.js"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^5.2.1",
+    "express-handlebars": "^8.0.6",
+    "mongodb": "^7.1.0",
+    "multer": "^1.4.5-lts.1",
+    "node": "^25.9.0"
+  }
+}
